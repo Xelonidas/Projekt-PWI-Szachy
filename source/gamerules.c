@@ -114,24 +114,25 @@ bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
         }
         //TODO - pawn promotion
         if(yB == 7){}
+        
         return true;
-        }
-        if(getChessPiece(xA, yA).color == 2){
-        //sprawdzenie ruchu po skosie w przypadku bicia
-        if((xB == xA-1 || xB == xA+1) && yB == yA-1){
-            if(getChessPiece(xB, yB).color != 1) return false;
-            }
-        //ruch o 2 pola do przodu
-        else if(yB > yA-1){
-            if(getChessPiece(xA, yA-1).type != 0 || getChessPiece(xB, yB).type !=0 || yA != 1) return false;
-            }
-        else if(yB == yA-1){
-            if(getChessPiece(xB, yB).type != 0) return false;
-            }
-        //TODO - pawn promotion
-        if(yB == 0){}
-        return true;
-            }
+	}
+	if(getChessPiece(xA, yA).color == 2){
+	//sprawdzenie ruchu po skosie w przypadku bicia
+		if((xB == xA-1 || xB == xA+1) && yB == yA-1){
+			if(getChessPiece(xB, yB).color != 1) return false;
+		}
+		//ruch o 2 pola do przodu
+		else if(yB > yA-1){
+			if(getChessPiece(xA, yA-1).type != 0 || getChessPiece(xB, yB).type !=0 || yA != 1) return false;
+		}
+		else if(yB == yA-1){
+			if(getChessPiece(xB, yB).type != 0) return false;
+		}
+		//TODO - pawn promotion
+		if(yB == 0){}
+		return true;
+	}
 	return false;
 }
 
@@ -141,25 +142,25 @@ bool checkBishopMove(int color, int xA, int yA, int xB, int yB) {
 	//sprawdzenie czy ruch jest po skosie
 	if(xA - yA == xB - yB) {
         if(xB > xA && yB > yA){ //down & right
-            for(int i=1,j=1;i<=(xB-xA);i++, j++){
-                    if(getChessPiece(xA+i,yA+j).type != 0) return false;
-                }
-            }
+            for(int i=1,j=1;i<(xB-xA);i++, j++){
+				if(getChessPiece(xA+i,yA+j).type != 0) return false;
+			}
+		}
         if(xB > xA && yB < yA){ //up & right
-            for(int i=1,j=-1;i<=(xB-xA);i++, j--){
-                    if(getChessPiece(xA+i,yA+j).type != 0) return false;
-                }
-            }
+            for(int i=1,j=-1;i<(xB-xA);i++, j--){
+				if(getChessPiece(xA+i,yA+j).type != 0) return false;
+			}
+		}
         if(xB < xA && yB > yA){ //down & left
-            for(int i=-1,j=1;i<=(xB-xA);i--, j++){
-                    if(getChessPiece(xA+i,yA+j).type != 0) return false;
-                }
-            }
+            for(int i=-1,j=1;i>(xB-xA);i--, j++){
+				if(getChessPiece(xA+i,yA+j).type != 0) return false;
+			}
+		}
         if(xB < xA && yB < yA){ //down & left
-            for(int i=-1,j=-1;i<=(xB-xA);i--, j--){
-                    if(getChessPiece(xA+i,yA+j).type != 0) return false;
-                }
-            }
+            for(int i=-1,j=-1;i>(xB-xA);i--, j--){
+				if(getChessPiece(xA+i,yA+j).type != 0) return false;
+			}
+		}
         return true;
     }
     return false;
