@@ -3,8 +3,7 @@
 ## Spis treści
 * [Zarys projektu](#zarys-projektu)
 * [Technologie](#technologie)
-* [Instrukcja konfiguracji](#instrukcja-konfiguracji)
-* [Instrukcja instalacji i uruchamiania](#instrukcja-instalacji-i-uruchamiania)
+* [Instrukcja instalacji i uruchomienia](#instrukcja-instalacji-i-uruchomienia)
 * [Jak grać?](#jak-grać)
 * [Licencje](#licencje)
 
