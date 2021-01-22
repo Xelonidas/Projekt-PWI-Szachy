@@ -6,6 +6,8 @@
 #include "gamerules.h"
 #include "front.h"
 
+
+
 bool is_valid_coord(int c)
 {
     //sprawdza poprawnosc wprowadzonego koordynatu
@@ -18,7 +20,7 @@ bool owns_piece(int color, int x, int y)
     /*if (!piece.color)
         return false;
     else*/
-        return (piece.color == color % 2);
+        return (piece.color-1 == color % 2);
 }
 
 bool convert_coordinates(int color, char *from, char *to)
@@ -28,9 +30,15 @@ bool convert_coordinates(int color, char *from, char *to)
     //zamienia a-h na 0-7 oraz 1-8 na 0-7
     int coords[4];
     coords[0] = (tolower(from[0]) - 'a'); //coords "from"
-    coords[1] = from[1] - ('1');
+    coords[1] = -from[1] + ('1')+7;
     coords[2] = (tolower(to[0]) - 'a'); //coords "to"
-    coords[3] = to[1] - ('1');
+    coords[3] = -to[1] + ('1')+7;
+    
+    ///// Zostawić na wypadek konieczności debugowania
+   /* FILE *f = fopen("out.txt", "w+");
+	fprintf( f, "%d %d %d %d\n", coords[0], coords[1], coords[2], coords[3]);
+	fclose(f);*/
+	
     for (int i = 0; i < 4; i++)
     {
         if (!is_valid_coord(coords[i]))
@@ -39,10 +47,10 @@ bool convert_coordinates(int color, char *from, char *to)
             return 0;
         }
     }
+    
     if (owns_piece(color, coords[0], coords[1]))
     {
-        performMove(coords[0], coords[1], coords[2], coords[3]);
-        return 1;
+        return performMove(coords[0], coords[1], coords[2], coords[3]);
     }
     return 0;
 }
@@ -128,10 +136,10 @@ void main_loop()
     bool game_over = false;
 
     box(coords_input, 0, 0);
-    mvwprintw(coords_input, 1, 1, "Ruch z: ");
+    mvwprintw(coords_input, 1, 1, "Ruch z:  ");
     mvwprintw(coords_input, 2, 1, "Ruch na: ");
     wrefresh(coords_input);
-
+    draw_board();
     while (!game_over)
     {
         do
@@ -148,8 +156,9 @@ void main_loop()
             wscanw(To, "%s", to);
             wclear(From);
             wclear(To);
+            draw_board();
         } while (!convert_coordinates(i, from, to));
-
+		 draw_board();
         i++;
     }
 }
@@ -354,4 +363,103 @@ void draw_board()
     draw_pieces(playing_board);
     refresh();
     wrefresh(playing_board);
+}
+void main_menu()
+{
+    WINDOW *MenuContainer = newwin(LINES, COLS, 0, 0);
+    WINDOW *MenuPanel = subwin(MenuContainer, 10, 15, LINES/2-5, COLS/2-8);
+    WINDOW *MenuAscii = subwin(MenuContainer, LINES/2-5,101,1,COLS/2-49);
+    FILE *chess;
+    char ch;
+    
+    init_pair(23, 89, 107);                     //font-roz, backg- zielen
+    init_pair(24, 107, 89);                     //na odwrot^
+    init_pair(25,COLOR_WHITE,COLOR_BLACK);      //standardowy kolor terminala
+    bkgd(COLOR_PAIR(23));                       //bgcolor MenuContainer
+    wbkgd(MenuAscii,COLOR_PAIR(23));            //bgcolor MenuAscii
+    wbkgd(MenuPanel,COLOR_PAIR(23));            //bgcolor MenuPanel
+
+    chess = popen("toilet -f ivrit \"Let\'s play chess\"! | boxes -d cat -p h8","r");
+    if(chess == NULL)
+    {   wprintw(MenuAscii,"Error, nie wczytano do pliku");
+        wrefresh(MenuAscii);
+    }
+    wmove(MenuAscii,0,0);
+
+    // WYSWIETLENIE ASCII ART
+    wattron(MenuAscii,COLOR_PAIR(23) | A_BOLD);
+    while((ch = fgetc(chess)) != EOF)
+        waddch(MenuAscii,ch);
+    wattroff(MenuAscii,COLOR_PAIR(23) | A_BOLD);
+
+    pclose(chess);
+    refresh();
+    wrefresh(MenuPanel);
+    wrefresh(MenuAscii);
+    
+    // OPCJE MENU
+    keypad(MenuPanel,true);
+    char choices[4][12] = {
+        "Nowa gra",
+        "Jakas opcja",
+        "Jakas opcja",
+        "Wyjdz z gry"
+    };
+    bool isPicked = false;
+    int highlight = 0;
+    int act;
+    wmove(MenuPanel,1,1);
+
+    // PETLA WYBORU
+    while(!isPicked)
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            if(i == highlight)
+            {   
+                wattron(MenuPanel,COLOR_PAIR(24));
+                mvwaddstr(MenuPanel, i+1, 1, choices[i]);
+                wattroff(MenuPanel,COLOR_PAIR(24));
+            }
+            else
+                mvwprintw(MenuPanel, i+1, 1, "%s", choices[i]);
+        }
+        wrefresh(MenuPanel);
+        refresh();
+
+        act = wgetch(MenuPanel);
+        switch (act)
+        {
+            case KEY_UP:
+                highlight--;
+                break;
+            case KEY_DOWN:
+                highlight++;
+                break;
+            case 10://enter
+                isPicked = true;
+                break;
+            default:
+                continue;
+        }
+        if(highlight > 3) highlight--;
+        if(highlight < 0) highlight++;
+    }
+    switch (highlight)
+    {
+        case 0:
+            wclear(MenuContainer);
+            bkgd(COLOR_PAIR(25));
+            delwin(MenuContainer);
+            main_loop();
+            break;
+        case 1:
+        case 2:
+            break;
+        case 3:
+            return;
+            break;
+        default:
+            break;
+    }
 }
