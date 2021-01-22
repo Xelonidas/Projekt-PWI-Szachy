@@ -104,14 +104,14 @@ bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
         //sprawdzenie ruchu po skosie w przypadku bicia
         if((xB == xA-1 || xB == xA+1) && yB == yA+1){
             if(getChessPiece(xB, yB).color != 2) return false;
-            }
+        }
         //ruch o 2 pola do przodu
-        if(yB > yA+1){
+        else if(yB > yA+1){
             if(getChessPiece(xA, yA+1).type != 0 || getChessPiece(xB, yB).type !=0 || yA != 1) return false;
-            }
-        if(yB == yA+1){
+        }
+        else if(yB == yA+1){
             if(getChessPiece(xB, yB).type != 0) return false;
-            }
+        }
         //TODO - pawn promotion
         if(yB == 7){}
         return true;
@@ -122,10 +122,10 @@ bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
             if(getChessPiece(xB, yB).color != 1) return false;
             }
         //ruch o 2 pola do przodu
-        if(yB > yA-1){
+        else if(yB > yA-1){
             if(getChessPiece(xA, yA-1).type != 0 || getChessPiece(xB, yB).type !=0 || yA != 1) return false;
             }
-        if(yB == yA-1){
+        else if(yB == yA-1){
             if(getChessPiece(xB, yB).type != 0) return false;
             }
         //TODO - pawn promotion
