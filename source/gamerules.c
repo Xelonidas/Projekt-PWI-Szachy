@@ -100,9 +100,22 @@ bool emptyTileMove(int color, int xA, int yA, int xB, int yB) {
 }
 
 bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
-    if(yA == yB){
-        return true;
-        }
+    if(getChessPiece(xA, yA).color == 1){
+        //sprawdzenie ruchu po skosie w przypadku bicia
+        if((xB == xA-1 || xB == xA+1) && yB == yA+1){
+            if(getChessPiece(xB, yB).color != 2) return false;
+            return true;
+            }
+        //ruch o 2 pola do przodu
+        if(yB > (yA + 1) && yA == 1){
+            if(getChessPiece(xA, yA+1).type != 0 || getChessPiece(xB, yB).type !=0 || yA != 1) return false;
+            return true;
+            }
+        if(yB == yA + 1){
+            if(getChessPiece(xB, yB).type != 0) return false;
+            return true;
+            }
+    return true;
 	return false;
 }
 
@@ -111,22 +124,22 @@ bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
 bool checkBishopMove(int color, int xA, int yA, int xB, int yB) {
 	//sprawdzenie czy ruch jest po skosie
 	if(xA - yA == xB - yB) {
-        if(xB > xA && yB > yA){//up & right
+        if(xB > xA && yB > yA){//down & right
             for(int i=1,j=1;i<=(xB-xA);i++, j++){
                     if(getChessPiece(xA+i,yA+j).type != 0) return false;
                 }
             }
-        if(xB > xA && yB < yA){//up & left
+        if(xB > xA && yB < yA){//down & left
             for(int i=1,j=-1;i<=(xB-xA);i++, j--){
                     if(getChessPiece(xA+i,yA+j).type != 0) return false;
                 }
             }
-        if(xB < xA && yB > yA){//down & right
+        if(xB < xA && yB > yA){//up & right
             for(int i=-1,j=1;i<=(xB-xA);i--, j++){
                     if(getChessPiece(xA+i,yA+j).type != 0) return false;
                 }
             }
-        if(xB < xA && yB < yA){//down & left
+        if(xB < xA && yB < yA){//up & left
             for(int i=-1,j=-1;i<=(xB-xA);i--, j--){
                     if(getChessPiece(xA+i,yA+j).type != 0) return false;
                 }
