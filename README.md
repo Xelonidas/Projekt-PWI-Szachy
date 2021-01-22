@@ -4,7 +4,7 @@
 * [Zarys projektu](#zarys-projektu)
 * [Technologie](#technologie)
 * [Instrukcja konfiguracji](#instrukcja-konfiguracji)
-* [Instrukcja instalacji](#instrukcja-instalacji)
+* [Instrukcja instalacji i uruchamiania](#instrukcja-instalacji-i-uruchamiania)
 * [Jak grać?](#jak-grać)
 * [Licencje](#licencje)
 
