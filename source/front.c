@@ -35,9 +35,9 @@ bool convert_coordinates(int color, char *from, char *to)
     coords[3] = -to[1] + ('1')+7;
     
     ///// Zostawić na wypadek konieczności debugowania
-    FILE *f = fopen("out.txt", "w+");
+    /*FILE *f = fopen("out.txt", "w+");
 	fprintf( f, "%d %d %d %d\n", coords[0], coords[1], coords[2], coords[3]);
-	fclose(f);
+	fclose(f);*/
 	
     for (int i = 0; i < 4; i++)
     {
