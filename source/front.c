@@ -6,6 +6,8 @@
 #include "gamerules.h"
 #include "front.h"
 
+
+
 bool is_valid_coord(int c)
 {
     //sprawdza poprawnosc wprowadzonego koordynatu
@@ -18,7 +20,7 @@ bool owns_piece(int color, int x, int y)
     /*if (!piece.color)
         return false;
     else*/
-        return (piece.color == color % 2);
+        return (piece.color-1 == color % 2);
 }
 
 bool convert_coordinates(int color, char *from, char *to)
@@ -28,9 +30,15 @@ bool convert_coordinates(int color, char *from, char *to)
     //zamienia a-h na 0-7 oraz 1-8 na 0-7
     int coords[4];
     coords[0] = (tolower(from[0]) - 'a'); //coords "from"
-    coords[1] = from[1] - ('1');
+    coords[1] = -from[1] + ('1')+7;
     coords[2] = (tolower(to[0]) - 'a'); //coords "to"
-    coords[3] = to[1] - ('1');
+    coords[3] = -to[1] + ('1')+7;
+    
+    ///// Zostawić na wypadek konieczności debugowania
+   /* FILE *f = fopen("out.txt", "w+");
+	fprintf( f, "%d %d %d %d\n", coords[0], coords[1], coords[2], coords[3]);
+	fclose(f);*/
+	
     for (int i = 0; i < 4; i++)
     {
         if (!is_valid_coord(coords[i]))
@@ -39,10 +47,10 @@ bool convert_coordinates(int color, char *from, char *to)
             return 0;
         }
     }
+    
     if (owns_piece(color, coords[0], coords[1]))
     {
-        performMove(coords[0], coords[1], coords[2], coords[3]);
-        return 1;
+        return performMove(coords[0], coords[1], coords[2], coords[3]);
     }
     return 0;
 }
@@ -128,7 +136,7 @@ void main_loop()
     bool game_over = false;
 
     box(coords_input, 0, 0);
-    mvwprintw(coords_input, 1, 1, "Ruch z: ");
+    mvwprintw(coords_input, 1, 1, "Ruch z:  ");
     mvwprintw(coords_input, 2, 1, "Ruch na: ");
     wrefresh(coords_input);
 
@@ -148,8 +156,9 @@ void main_loop()
             wscanw(To, "%s", to);
             wclear(From);
             wclear(To);
+            draw_board();
         } while (!convert_coordinates(i, from, to));
-
+		 draw_board();
         i++;
     }
 }
