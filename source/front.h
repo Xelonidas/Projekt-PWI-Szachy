@@ -5,3 +5,4 @@ void draw_coordinates(WINDOW *board);
 bool field_color(int x, int y);
 void draw_pieces(WINDOW *board);
 void draw_board();
+void main_menu();

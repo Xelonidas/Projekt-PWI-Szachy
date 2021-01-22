@@ -12,7 +12,7 @@ int main()
     initscr();
     //noecho();
     //cbreak();
-    
+    start_color();
     gameInit();
     
     //printf("Test\n");
@@ -31,9 +31,6 @@ int main()
     printf("%d %d\n", isKingChecked(1), isKingChecked(2));
     
     DisplayArrayContent();*/
-    draw_board();
-    main_loop();
-   // main_menu();
-    getch();
+    main_menu();
     endwin();
 }
