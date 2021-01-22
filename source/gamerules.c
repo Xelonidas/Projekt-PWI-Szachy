@@ -100,6 +100,9 @@ bool emptyTileMove(int color, int xA, int yA, int xB, int yB) {
 }
 
 bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
+    if(yA == yB){
+        return true;
+        }
 	return false;
 }
 
@@ -108,9 +111,26 @@ bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
 bool checkBishopMove(int color, int xA, int yA, int xB, int yB) {
 	//sprawdzenie czy ruch jest po skosie
 	if(xA - yA == xB - yB) {
-        for(int i = min(xB, xA) + 1; i < max(xB, xA); i++) {
-            if(getChessPiece(i, yA).type != 0) return false;
-        }
+        if(xB > xA && yB > yA){//up & right
+            for(int i=1,j=1;i<=(xB-xA);i++, j++){
+                    if(getChessPiece(xA+i,yA+j).type != 0) return false;
+                }
+            }
+        if(xB > xA && yB < yA){//up & left
+            for(int i=1,j=-1;i<=(xB-xA);i++, j--){
+                    if(getChessPiece(xA+i,yA+j).type != 0) return false;
+                }
+            }
+        if(xB < xA && yB > yA){//down & right
+            for(int i=-1,j=1;i<=(xB-xA);i--, j++){
+                    if(getChessPiece(xA+i,yA+j).type != 0) return false;
+                }
+            }
+        if(xB < xA && yB < yA){//down & left
+            for(int i=-1,j=-1;i<=(xB-xA);i--, j--){
+                    if(getChessPiece(xA+i,yA+j).type != 0) return false;
+                }
+            }
         return true;
     }
     return false;
@@ -181,7 +201,7 @@ bool checkKingMove(int color, int xA, int yA, int xB, int yB) {
 				 getChessPiece(1, 0).type == 0 &&
 				 getChessPiece(2, 0).type == 0 &&
 				 getChessPiece(3, 0).type ==  0) {
-				
+
 				removeChessPiece(0,0);
 				setChessPiece(Rook ,3, 0);
 				return true;
@@ -205,7 +225,7 @@ bool checkKingMove(int color, int xA, int yA, int xB, int yB) {
 				 getChessPiece(1, 7).type == 0 &&
 				 getChessPiece(2, 7).type == 0 &&
 				 getChessPiece(3, 7).type ==  0) {
-				
+
 				removeChessPiece(0,7);
 				setChessPiece(Rook ,3, 7);
 				return true;
@@ -222,8 +242,8 @@ bool checkKingMove(int color, int xA, int yA, int xB, int yB) {
 			 }
 		}
 	}
-	
-	return false;  
+
+	return false;
 }
 
 int checkWinCondition(int color) {
