@@ -15,10 +15,10 @@ bool is_valid_coord(int c)
 bool owns_piece(int color, int x, int y)
 {
     ChessPiece piece = getChessPiece(x, y);
-    if (!piece.color)
+    /*if (!piece.color)
         return false;
-    else
-        return (piece.color != color % 2);
+    else*/
+        return (piece.color == color % 2);
 }
 
 bool convert_coordinates(int color, char *from, char *to)
@@ -27,27 +27,94 @@ bool convert_coordinates(int color, char *from, char *to)
     //wpp zwraca wywoluje funkcje perform move z podanymi koordynatami
     //zamienia a-h na 0-7 oraz 1-8 na 0-7
     int coords[4];
-
     coords[0] = (tolower(from[0]) - 'a'); //coords "from"
-    coords[1] = from[1] - ('0' + 1);
+    coords[1] = from[1] - ('1');
     coords[2] = (tolower(to[0]) - 'a'); //coords "to"
-    coords[3] = to[1] - ('0' + 1);
-
-    for (int i = 0; i < 3; i++)
+    coords[3] = to[1] - ('1');
+    for (int i = 0; i < 4; i++)
     {
         if (!is_valid_coord(coords[i]))
         {
+			
             return 0;
         }
     }
     if (owns_piece(color, coords[0], coords[1]))
     {
-        performMove(coords[0], coords[1], coords[2], coords[4]);
+        performMove(coords[0], coords[1], coords[2], coords[3]);
         return 1;
     }
     return 0;
 }
+//funkcja wyswietla interfejs wybierania figury
+//oraz zwraca jaką figure wybrano następnie ponownie
+//laduje plansze
+//nie podlaczona do niczego
+int choosePiece()
+{
+    noecho();
+    WINDOW *SelectPiece =  newwin(6,16,47,33);
+    box(SelectPiece,0,0);
 
+    refresh();
+    wrefresh(SelectPiece);
+
+    keypad(SelectPiece,true);
+    char choices[4][10] = {
+        "Wieza",
+        "Kon",
+        "Goniec",
+        "Hetman"
+    };
+    int ch;
+    int highlight = 0;
+    bool isPicekd = false;
+    
+    init_pair(20, COLOR_WHITE, 124);
+    init_pair(21,124, COLOR_WHITE);
+    wbkgd(SelectPiece, COLOR_PAIR(20));
+
+    mvwaddstr(SelectPiece, 0, 1, "Wybierz figure");
+    while(!isPicekd)
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            if(i == highlight)
+            {   
+                wattron(SelectPiece,COLOR_PAIR(21));
+                mvwaddstr(SelectPiece, i+1, 1, choices[i]);
+                wattroff(SelectPiece,COLOR_PAIR(21));
+            }
+            else
+                mvwprintw(SelectPiece, i+1, 1, "%s", choices[i]);
+        }
+        wrefresh(SelectPiece);
+        refresh();
+
+        ch = wgetch(SelectPiece);
+        switch (ch)
+        {
+            case KEY_UP:
+                highlight--;
+                break;
+            case KEY_DOWN:
+                highlight++;
+                break;
+            case 10:
+            printw("xd");
+                isPicekd = true;
+                break;
+            default:
+                continue;
+        }
+        if(highlight > 3) highlight--;
+        if(highlight < 0) highlight++;
+    }
+    delwin(SelectPiece);
+
+    draw_board();
+    return 4 + highlight;//zgodnie z oznaczeniem typów figur
+}
 void main_loop()
 {
     WINDOW *coords_input = newwin(4, 21, 47, 10);
@@ -79,7 +146,6 @@ void main_loop()
             wscanw(From, "%s", from);
             move(49, 20);
             wscanw(To, "%s", to);
-
             wclear(From);
             wclear(To);
         } while (!convert_coordinates(i, from, to));

@@ -33,7 +33,7 @@ ChessPiece *initChessPiece(int xA, int yA, int color, int type, bool (*moveFunct
 // zwraca pionek znajdujacy sie na danym polu
 ChessPiece getChessPiece(int xA, int yA);
 
-// usuwa bionek znajdujacy sie na danym polu
+// usuwa pionek znajdujacy sie na danym polu
 void removeChessPiece(int xA, int yA);
 
 // ustawia pionek na dane pole
