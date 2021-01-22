@@ -30,9 +30,9 @@ int main()
     
     DisplayArrayContent();
     */
-    //draw_board();
-    //main_loop();
-    main_menu();
+    draw_board();
+    main_loop();
+   // main_menu();
     getch();
     endwin();
 }
