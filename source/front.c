@@ -35,7 +35,7 @@ bool convert_coordinates(int color, char *from, char *to)
     coords[3] = -to[1] + ('1')+7;
     
     ///// Zostawić na wypadek konieczności debugowania
-   /* FILE *f = fopen("out.txt", "w+");
+    /*FILE *f = fopen("out.txt", "w+");
 	fprintf( f, "%d %d %d %d\n", coords[0], coords[1], coords[2], coords[3]);
 	fclose(f);*/
 	
@@ -132,7 +132,7 @@ void main_loop()
     box(coords_input, 0, 0);
     char from[2];
     char to[2];
-    int i = 0;
+    int i = 1;
     bool game_over = false;
 
     box(coords_input, 0, 0);
@@ -146,9 +146,9 @@ void main_loop()
         { //petla wczytujaca koordynaty wykona sie minimum raz, az do wprowadzenia "poprawnych"
             box(coords_input, 0, 0);
             if (i % 2 == 0)
-                mvwprintw(coords_input, 0, 4, "Ruch-bialego");
-            else
                 mvwprintw(coords_input, 0, 4, "Ruch-czarnego");
+            else
+                mvwprintw(coords_input, 0, 4, "Ruch-bialego");
             wrefresh(coords_input);
 
             wscanw(From, "%s", from);
