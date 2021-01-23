@@ -195,12 +195,12 @@ bool checkBishopMove(int color, int xA, int yA, int xB, int yB) {
 	if(xA - yA == xB - yB) {
         if(xB > xA && yB > yA){ //down & right
             for(int i=1;i<(xB-xA-1);i++){
-				if(getChessPiece(xA+i,yA+j).type != 0) return false;
+				if(getChessPiece(xA+i,yA+i).type != 0) return false;
 			}
 		}
         if(xB > xA && yB < yA){ //up & right
             for(int i=1;i<(xB-xA-1);i++){
-				if(getChessPiece(xA+i,yA+j).type != 0) return false;
+				if(getChessPiece(xA+i,yA+i).type != 0) return false;
 			}
 		}
         if(xB < xA && yB > yA){ //down & left
