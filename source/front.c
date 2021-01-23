@@ -380,9 +380,9 @@ void main_menu()
     wbkgd(MenuAscii,COLOR_PAIR(23));            //bgcolor MenuAscii
     wbkgd(MenuPanel,COLOR_PAIR(23));            //bgcolor MenuPanel
 
-    chess = popen("toilet -f ivrit \"Let\'s play chess\"! | boxes -d cat -p h8","r");
+    chess = fopen("obrazek.txt","r");
     if(chess == NULL)
-    {   wprintw(MenuAscii,"Error, nie wczytano do pliku");
+    {   wprintw(MenuAscii,"Error, nie udalo otworzyc sie pliku");
         wrefresh(MenuAscii);
     }
     wmove(MenuAscii,0,0);
@@ -393,7 +393,7 @@ void main_menu()
         waddch(MenuAscii,ch);
     wattroff(MenuAscii,COLOR_PAIR(23) | A_BOLD);
 
-    //pclose(chess);
+    fclose(chess);
     refresh();
     wrefresh(MenuPanel);
     wrefresh(MenuAscii);
