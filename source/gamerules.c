@@ -192,32 +192,30 @@ bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
 //TODO sprawdzenie czy pola pomiędzy A i B są puste
 bool checkBishopMove(int color, int xA, int yA, int xB, int yB) {
 	//sprawdzenie czy ruch jest po skosie
-	ChessPiece bishop = getChessPiece(xA, yA);
 	if(xA - yA == xB - yB) {
         if(xB > xA && yB > yA){ //down & right
-            for(int i=1,j=1;i<(xB-xA-1);i++, j++){
+            for(int i=1;i<(xB-xA-1);i++){
 				if(getChessPiece(xA+i,yA+j).type != 0) return false;
 			}
 		}
-        else if(xB > xA && yB < yA){ //up & right
-            for(int i=1,j=-1;i<(xB-xA-1);i++, j--){
+        if(xB > xA && yB < yA){ //up & right
+            for(int i=1;i<(xB-xA-1);i++){
 				if(getChessPiece(xA+i,yA+j).type != 0) return false;
 			}
 		}
-        else if(xB < xA && yB > yA){ //down & left
-            for(int i=-1,j=1;i>(xB-xA-1);i--, j++){
-				if(getChessPiece(xA+i,yA+j).type != 0) return false;
+        if(xB < xA && yB > yA){ //down & left
+            for(int i=1;i<(xA-xB-1);i++){
+				if(getChessPiece(xB+i,yB-i).type != 0) return false;
 			}
 		}
-        else if(xB < xA && yB < yA){ //up & left
-            for(int i=-1,j=-1;i>(xB-xA-1);i--, j--){
-				if(getChessPiece(xA+i,yA+j).type != 0) return false;
+        if(xB < xA && yB < yA){ //up & left
+            for(int i=1;i<(xA-xB-1);i++){
+				if(getChessPiece(xB+i,yB+i).type != 0) return false;
 			}
 		}
-		//if(getChessPiece(xB, yB).color == bishop.color) return false;
-        else return true;
+        return true;
     }
-    else return false;
+    return false;
 }
 
 //koń
