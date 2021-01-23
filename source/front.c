@@ -6,8 +6,6 @@
 #include "gamerules.h"
 #include "front.h"
 
-
-
 bool is_valid_coord(int c)
 {
     //sprawdza poprawnosc wprowadzonego koordynatu
@@ -144,6 +142,7 @@ void main_loop()
     {
         do
         { //petla wczytujaca koordynaty wykona sie minimum raz, az do wprowadzenia "poprawnych"
+			wrefresh(coords_input);
             box(coords_input, 0, 0);
             if (i % 2 == 0)
                 mvwprintw(coords_input, 0, 4, "Ruch-czarnego");
