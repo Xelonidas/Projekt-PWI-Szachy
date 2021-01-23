@@ -86,12 +86,14 @@ bool performMove(int xA, int yA, int xB, int yB) {
 	//nie można wykonać ruchu w miejscu
 	if(xA == xB && yA == yB) return false;
 	ChessPiece chessPiece = getChessPiece(xA, yA);
-	if(!chessPiece.moveFunctionPointer(chessPiece.color, xA, yA, xB, yB)) {
+	if(!getChessPiece(xA, yA).moveFunctionPointer(chessPiece.color, xA, yA, xB, yB)) {
 		return false;
 	}
-	if(getChessPiece(xA, yA).color == getChessPiece(xB, yB).color)
+	if(chessPiece.color == getChessPiece(xB, yB).color)
 			return false;
-	removeChessPiece(xA, yA); removeChessPiece(xB, yB);
+			
+	chessPiece = getChessPiece(xA, yA);
+	removeChessPiece(xA, yA);
 	setChessPiece(chessPiece, xB, yB);
 	return true;
 }
