@@ -7,7 +7,7 @@
 #include "source/gamerules.h"
 #include "source/front.h"
 
-#if 0
+#if 1
 	#define DEBUG
 #endif
 

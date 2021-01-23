@@ -41,7 +41,6 @@ bool convert_coordinates(int color, char *from, char *to)
     {
         if (!is_valid_coord(coords[i]))
         {
-			
             return 0;
         }
     }
@@ -106,8 +105,7 @@ int choosePiece()
             case KEY_DOWN:
                 highlight++;
                 break;
-            case 10:
-            printw("xd");
+            case 10://enter
                 isPicekd = true;
                 break;
             default:
@@ -116,10 +114,13 @@ int choosePiece()
         if(highlight > 3) highlight--;
         if(highlight < 0) highlight++;
     }
+    wclear(SelectPiece);
+    wbkgd(SelectPiece,COLOR_PAIR(25));
+    wrefresh(SelectPiece);
     delwin(SelectPiece);
 
     draw_board();
-    return 4 + highlight;//zgodnie z oznaczeniem typów figur
+    return 2 + highlight;//zgodnie z oznaczeniem typów figur
 }
 void main_loop()
 {
@@ -140,6 +141,7 @@ void main_loop()
     draw_board();
     while (!game_over)
     {
+        echo();
         do
         { //petla wczytujaca koordynaty wykona sie minimum raz, az do wprowadzenia "poprawnych"
 			wrefresh(coords_input);
