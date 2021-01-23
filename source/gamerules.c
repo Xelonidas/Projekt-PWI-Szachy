@@ -114,7 +114,6 @@ bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
         else if(yB == yA+1){
             if(getChessPiece(xB, yB).type != 0) return false;
         }
-<<<<<<< HEAD
         else return false;
         
         if(yB == 7){
@@ -191,7 +190,7 @@ bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
 //TODO sprawdzenie czy pola pomiędzy A i B są puste
 bool checkBishopMove(int color, int xA, int yA, int xB, int yB) {
 	//sprawdzenie czy ruch jest po skosie
-	ChessPiece bishop = getChessPiece(xA, yA)
+	ChessPiece bishop = getChessPiece(xA, yA);
 	if(xA - yA == xB - yB) {
         if(xB > xA && yB > yA){ //down & right
             for(int i=1,j=1;i<(xB-xA-1);i++, j++){
