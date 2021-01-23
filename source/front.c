@@ -392,7 +392,7 @@ void main_menu()
         waddch(MenuAscii,ch);
     wattroff(MenuAscii,COLOR_PAIR(23) | A_BOLD);
 
-    pclose(chess);
+    //pclose(chess);
     refresh();
     wrefresh(MenuPanel);
     wrefresh(MenuAscii);
