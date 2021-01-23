@@ -7,6 +7,10 @@
 #include "source/gamerules.h"
 #include "source/front.h"
 
+#if 0
+	#define DEBUG
+#endif
+
 int main()
 {
     initscr();
@@ -16,21 +20,23 @@ int main()
     gameInit();
     
     //printf("Test\n");
+    #ifdef DEBUG
+		setChessPiece(getChessPiece(7,6), 7, 1);
+		setChessPiece(getChessPiece(0,1), 0, 6);
+	#endif
     
-    /*for(int i = 0; i < 8; i++) {
-		removeChessPiece(i,1);
-		removeChessPiece(i,6);
-		ChessPiece cp = getChessPiece(i, 0);
-		performMove(i, 0, i, 2);
-		draw_board();
-		getchar();
-	}*/
    /* performMove(7, 7, 7, 2);
     performMove(0, 2, 4, 2);
     
     printf("%d %d\n", isKingChecked(1), isKingChecked(2));
     
     DisplayArrayContent();*/
-    main_menu();
+    #ifndef DEBUG
+		main_menu();
+	#endif
+	
+	#ifdef DEBUG
+		main_loop();
+	#endif
     endwin();
 }

@@ -152,7 +152,7 @@ bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
 		}
 		//ruch o 2 pola do przodu
 		else if(yB == yA-2){
-			if(getChessPiece(xA, yA-1).type != 0 || getChessPiece(xB, yB).type !=0 || yA != 1) return false;
+			if(getChessPiece(xA, yA-1).type != 0 || getChessPiece(xB, yB).type !=0 || yA != 6) return false;
 		}
 		else if(yB == yA-1){
 			if(getChessPiece(xB, yB).type != 0) return false;
