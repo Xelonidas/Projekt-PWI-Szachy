@@ -1,7 +1,9 @@
 #include <stdbool.h>
 #include <stdlib.h>
+#include <ncurses.h>
 #include "structure.h"
 #include "gamerules.h"
+#include "front.h"
 
 void gameInit() {
 	ChessPiece newChessPiece;
@@ -106,14 +108,39 @@ bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
             if(getChessPiece(xB, yB).color != 2) return false;
         }
         //ruch o 2 pola do przodu
-        else if(yB > yA+1){
+        else if(yB == yA+2){
             if(getChessPiece(xA, yA+1).type != 0 || getChessPiece(xB, yB).type !=0 || yA != 1) return false;
         }
         else if(yB == yA+1){
             if(getChessPiece(xB, yB).type != 0) return false;
         }
-        //TODO - pawn promotion
-        if(yB == 7){}
+        else return false;
+        
+        if(yB == 7){
+		
+			int choice = choosePiece();
+			ChessPiece new;
+			new.color = 1;
+			switch(choice) {
+				case 2: //wieża
+					new.type = 2;
+					new.moveFunctionPointer = &checkRookMove;
+				break;
+				case 3: //koń
+					new.type = 3;
+					new.moveFunctionPointer = &checkKnightMove;
+				break;
+				case 4: //goniec
+					new.type = 4;
+					new.moveFunctionPointer = &checkBishopMove;
+				break;
+				default: //królowa
+					new.type = 5;
+					new.moveFunctionPointer = &checkQueenMove;
+			}
+			
+			setChessPiece(new, xA, yA);
+		}
         
         return true;
 	}
@@ -123,14 +150,38 @@ bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
 			if(getChessPiece(xB, yB).color != 1) return false;
 		}
 		//ruch o 2 pola do przodu
-		else if(yB > yA-1){
+		else if(yB == yA-2){
 			if(getChessPiece(xA, yA-1).type != 0 || getChessPiece(xB, yB).type !=0 || yA != 1) return false;
 		}
 		else if(yB == yA-1){
 			if(getChessPiece(xB, yB).type != 0) return false;
 		}
-		//TODO - pawn promotion
-		if(yB == 0){}
+		else return false;
+		
+		if(yB == 0){
+			int choice = choosePiece();
+			ChessPiece new;
+			new.color = 2;
+			switch(choice) {
+				case 2: //wieża
+					new.type = 2;
+					new.moveFunctionPointer = &checkRookMove;
+				break;
+				case 3: //koń
+					new.type = 3;
+					new.moveFunctionPointer = &checkKnightMove;
+				break;
+				case 4: //goniec
+					new.type = 4;
+					new.moveFunctionPointer = &checkBishopMove;
+				break;
+				default: //królowa
+					new.type = 5;
+					new.moveFunctionPointer = &checkQueenMove;
+			}
+			
+			setChessPiece(new, xA, yA);
+		}
 		return true;
 	}
 	return false;
