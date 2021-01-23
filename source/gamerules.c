@@ -91,7 +91,7 @@ bool performMove(int xA, int yA, int xB, int yB) {
 	}
 	if(chessPiece.color == getChessPiece(xB, yB).color)
 			return false;
-			
+
 	chessPiece = getChessPiece(xA, yA);
 	removeChessPiece(xA, yA);
 	setChessPiece(chessPiece, xB, yB);
@@ -117,9 +117,9 @@ bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
             if(getChessPiece(xB, yB).type != 0) return false;
         }
         else return false;
-        
+
         if(yB == 7){
-		
+
 			int choice = choosePiece();
 			ChessPiece new;
 			new.color = 1;
@@ -140,7 +140,7 @@ bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
 					new.type = 5;
 					new.moveFunctionPointer = &checkQueenMove;
 			}
-			
+
 			setChessPiece(new, xA, yA);
 		}
         return true;
@@ -158,7 +158,7 @@ bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
 			if(getChessPiece(xB, yB).type != 0) return false;
 		}
 		else return false;
-		
+
 		if(yB == 0){
 			int choice = choosePiece();
 			ChessPiece new;
@@ -180,7 +180,7 @@ bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
 					new.type = 5;
 					new.moveFunctionPointer = &checkQueenMove;
 			}
-			
+
 			setChessPiece(new, xA, yA);
 		}
 		return true;
@@ -199,25 +199,25 @@ bool checkBishopMove(int color, int xA, int yA, int xB, int yB) {
 				if(getChessPiece(xA+i,yA+j).type != 0) return false;
 			}
 		}
-        if(xB > xA && yB < yA){ //up & right
+        else if(xB > xA && yB < yA){ //up & right
             for(int i=1,j=-1;i<(xB-xA-1);i++, j--){
 				if(getChessPiece(xA+i,yA+j).type != 0) return false;
 			}
 		}
-        if(xB < xA && yB > yA){ //down & left
+        else if(xB < xA && yB > yA){ //down & left
             for(int i=-1,j=1;i>(xB-xA-1);i--, j++){
 				if(getChessPiece(xA+i,yA+j).type != 0) return false;
 			}
 		}
-        if(xB < xA && yB < yA){ //down & left
+        else if(xB < xA && yB < yA){ //up & left
             for(int i=-1,j=-1;i>(xB-xA-1);i--, j--){
 				if(getChessPiece(xA+i,yA+j).type != 0) return false;
 			}
 		}
 		//if(getChessPiece(xB, yB).color == bishop.color) return false;
-        return true;
+        else return true;
     }
-    return false;
+    else return false;
 }
 
 //koń
