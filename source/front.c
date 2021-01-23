@@ -41,7 +41,6 @@ bool convert_coordinates(int color, char *from, char *to)
     {
         if (!is_valid_coord(coords[i]))
         {
-			
             return 0;
         }
     }
@@ -106,8 +105,7 @@ int choosePiece()
             case KEY_DOWN:
                 highlight++;
                 break;
-            case 10:
-            printw("xd");
+            case 10://enter
                 isPicekd = true;
                 break;
             default:
@@ -116,10 +114,13 @@ int choosePiece()
         if(highlight > 3) highlight--;
         if(highlight < 0) highlight++;
     }
+    wclear(SelectPiece);
+    wbkgd(SelectPiece,COLOR_PAIR(25));
+    wrefresh(SelectPiece);
     delwin(SelectPiece);
 
     draw_board();
-    return 4 + highlight;//zgodnie z oznaczeniem typów figur
+    return 2 + highlight;//zgodnie z oznaczeniem typów figur
 }
 void main_loop()
 {
@@ -140,6 +141,7 @@ void main_loop()
     draw_board();
     while (!game_over)
     {
+        echo();
         do
         { //petla wczytujaca koordynaty wykona sie minimum raz, az do wprowadzenia "poprawnych"
 			wrefresh(coords_input);
@@ -378,9 +380,9 @@ void main_menu()
     wbkgd(MenuAscii,COLOR_PAIR(23));            //bgcolor MenuAscii
     wbkgd(MenuPanel,COLOR_PAIR(23));            //bgcolor MenuPanel
 
-    chess = popen("toilet -f ivrit \"Let\'s play chess\"! | boxes -d cat -p h8","r");
+    chess = fopen("obrazek.txt","r");
     if(chess == NULL)
-    {   wprintw(MenuAscii,"Error, nie wczytano do pliku");
+    {   wprintw(MenuAscii,"Error, nie udalo otworzyc sie pliku");
         wrefresh(MenuAscii);
     }
     wmove(MenuAscii,0,0);
@@ -391,7 +393,7 @@ void main_menu()
         waddch(MenuAscii,ch);
     wattroff(MenuAscii,COLOR_PAIR(23) | A_BOLD);
 
-    //pclose(chess);
+    fclose(chess);
     refresh();
     wrefresh(MenuPanel);
     wrefresh(MenuAscii);
