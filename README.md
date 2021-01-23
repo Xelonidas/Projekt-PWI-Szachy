@@ -1,4 +1,7 @@
 # Szachy - implementacja komputerowa
+<p align="center">
+  <img src="https://i.imgur.com/tEQbD6K.png">
+</p>
 
 ## Spis treści
 * [Zarys projektu](#zarys-projektu)
@@ -16,7 +19,7 @@ Projekt jest implementacją komputerową znanej gry planszowej - szachy w język
 * Nauka pracy zespołowej i efektywnym działaniem w zespole
 
 ## Technologie
-Projekt tworzony jest w języku programistycznym C. 
+Projekt tworzony jest w języku programistycznym C z użyciem biblioteki ncurses.
 
 ## Instrukcja instalacji i uruchomienia
 * Sklonuj repozytorium
@@ -29,5 +32,13 @@ make
 ./szachy
 ```
 ## Jak grać?
+W głównym menu wybierz opcję ```Nowa gra```.
+Ruchy wykonuj podając najpierw koordynaty bierka, który chcesz wybrać, a następnie koordynaty, na które chcesz go przestawić.
+Każde wprowadzone koordynaty zatwierdź przyciskiem enter.
+
+<p float="left">
+  <img src="https://i.imgur.com/mvX3uA8.png" width="450" height="300"/>
+  <img src="https://i.imgur.com/NH3HRmV.png" width="450" height="300"/> 
+</p>
 
 ## Licencje
