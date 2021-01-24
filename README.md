@@ -48,5 +48,7 @@ Po wprowadzeniu litery i cyfry koordynatów (np. ```e4```) zatwierdź je przycis
   <img src="https://i.imgur.com/NH3HRmV.png" width="450" height="300"/> 
 </p>
 
+Wpisanie w pola kolejno ```ex``` oraz ```it``` przerywa grę.
+
 ## Licencje
 The codes and the pretrained model in this repository are under the MIT license as specified by the LICENSE file.

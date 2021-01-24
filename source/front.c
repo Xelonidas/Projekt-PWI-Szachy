@@ -158,6 +158,8 @@ void main_loop()
             wclear(From);
             wclear(To);
             draw_board();
+		if(tolower(from[0]) == 'e' && tolower(from[1]) == 'x' &&
+		tolower(to[0]) == 'i' && tolower(to[1]) == 't') return;
         } while (!convert_coordinates(i, from, to));
 		 draw_board();
 		 
