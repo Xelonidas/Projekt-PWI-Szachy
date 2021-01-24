@@ -401,8 +401,8 @@ void main_menu()
     // OPCJE MENU
     keypad(MenuPanel,true);
     char choices[4][12] = {
-        "Nowa gra",
-        "Jakas opcja",
+        "Zwykla gra",
+        "Horda",
         "Jakas opcja",
         "Wyjdz z gry"
     };
@@ -452,6 +452,8 @@ void main_menu()
             wclear(MenuContainer);
             bkgd(COLOR_PAIR(25));
             delwin(MenuContainer);
+            clear();
+            gameInit();
             main_loop();
             break;
         case 1:

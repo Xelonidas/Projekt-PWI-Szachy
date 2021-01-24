@@ -17,8 +17,7 @@ int main()
     //noecho();
     //cbreak();
     start_color();
-    gameInit();
-    
+
     //printf("Test\n");
     #ifdef DEBUG
 		setChessPiece(getChessPiece(7,6), 7, 1);
@@ -36,6 +35,7 @@ int main()
 	#endif
 	
 	#ifdef DEBUG
+	    gameInit();
 		main_loop();
 	#endif
     endwin();

@@ -192,7 +192,7 @@ bool checkPawnsMove(int color, int xA, int yA, int xB, int yB) {
 //TODO sprawdzenie czy pola pomiędzy A i B są puste
 bool checkBishopMove(int color, int xA, int yA, int xB, int yB) {
 	//sprawdzenie czy ruch jest po skosie
-	if(xA - yA == xB - yB) {
+	if(xA - yA == xB - yB || xA + yA == xB + yB) {
         if(xB > xA && yB > yA){ //down & right
             for(int i=1;i<(xB-xA-1);i++){
 				if(getChessPiece(xA+i,yA+i).type != 0) return false;
