@@ -11,7 +11,7 @@
 * [Licencje](#licencje)
 
 ## Zarys projektu
-Projekt jest implementacją komputerową znanej gry planszowej - szachy w języku programistycznym C. Powstał on w ramach projektu programistycznego na przedmiot - Podstawowy warsztat informatyka realizowany w ramach I semestru studiów Informatycznych I stopnia na Instytucie Infomratycznym Uniwersytetu Wrocławskiego w roku 2020/2021. Autorom projektu zależało na jak najdokładniejszego odwzorowania uczucia gry w szachy. </br>
+Projekt jest implementacją komputerową znanej gry planszowej - szachy w języku programistycznym C. Powstał on w ramach projektu programistycznego na przedmiot - Podstawowy warsztat informatyka realizowany w ramach I semestru studiów Informatycznych I stopnia na Instytucie Informatycznym Uniwersytetu Wrocławskiego w roku 2020/2021. Autorom projektu zależało na jak najdokładniejszego odwzorowania uczucia gry w szachy. </br>
 
 ### Cele: 
 * Dokładno odwzorowanie mechanik i reguł gry w szachy
@@ -32,11 +32,11 @@ make
 ./szachy
 ```
 ## Jak grać?
-W głównym menu wybierz opcję ```Nowa gra```.
-Ruchy wykonuj podając najpierw koordynaty bierka, który chcesz wybrać, a następnie koordynaty, na które chcesz go przestawić.
-Każde wprowadzone koordynaty zatwierdź przyciskiem enter.
+W głównym menu wybierz opcję ```Nowa gra```. <br>
+Ruchy wykonuj podając najpierw koordynaty bierka, który chcesz wybrać, a następnie koordynaty, na które chcesz go przestawić.<br>
+Po wprowadzeniu litery i cyfry koordynatów (np. ```e4```) zatwierdź je przyciskiem enter.
 
-<p float="left">
+<p align="center">
   <img src="https://i.imgur.com/mvX3uA8.png" width="450" height="300"/>
   <img src="https://i.imgur.com/NH3HRmV.png" width="450" height="300"/> 
 </p>
