@@ -160,6 +160,17 @@ void main_loop()
             draw_board();
         } while (!convert_coordinates(i, from, to));
 		 draw_board();
+		 
+		 int status =  checkWinCondition();
+		 if(status == 1) {
+			//Wygrywa gracz 2
+			game_over = true;
+		 } 
+		 if(status == 2) {
+			//Wygrywa gracz 1
+			game_over = true;
+		 } 
+    
         i++;
     }
 }

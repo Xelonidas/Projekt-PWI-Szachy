@@ -307,7 +307,9 @@ bool checkKingMove(int color, int xA, int yA, int xB, int yB) {
 	return false;
 }
 
-int checkWinCondition(int color) {
+int checkWinCondition() {
+	if(isKingChecked(1) == 0) return 2;
+	if(isKingChecked(2) == 0) return 1;
 	return 0;
 }
 
