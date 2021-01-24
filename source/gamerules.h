@@ -1,5 +1,7 @@
 //Funkcja wczytuje domyślny stan planszy
 void gameInit();
+void gameHoardInit();
+void gameRevoltInit();
 //Poniższe funkcje sprawdzają czy dany pionek może się poruszyć z pola A na pole B
 //Jeśli może to funkcja zwraca true w przeciwnym przypadku zwracany jest false
 bool emptyTileMove(int color, int xA, int yA, int xB, int yB);

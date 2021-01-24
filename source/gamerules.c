@@ -81,6 +81,37 @@ void gameInit() {
 
 	return;
 }
+void gameHoardInit() {
+	ChessPiece whitePawn = getChessPiece(0, 6);
+	for(int i = 0; i <= 7; i++)
+		if(i != 4)
+			setChessPiece(whitePawn, i, 7);
+			
+	for(int i = 0; i <= 7; i++) {
+		setChessPiece(whitePawn, i, 5);
+		setChessPiece(whitePawn, i, 4);
+	}
+	setChessPiece(whitePawn, 1, 3);
+	setChessPiece(whitePawn, 2, 3);
+	setChessPiece(whitePawn, 5, 3);
+	setChessPiece(whitePawn, 6, 3);
+}
+void gameRevoltInit() {
+	for(int i = 0; i <= 7; i++) {
+		if(i != 4) {
+			removeChessPiece(i, 7);
+			removeChessPiece(i, 1);
+		}
+	}
+	ChessPiece blackKnight = getChessPiece(1, 0);
+	setChessPiece(blackKnight, 0, 0);
+	removeChessPiece(1, 0);
+	setChessPiece(blackKnight, 2, 0);
+	removeChessPiece(3, 0);
+	removeChessPiece(5, 0);
+	setChessPiece(blackKnight, 6, 0);
+	removeChessPiece(7, 0);
+}
 
 bool performMove(int xA, int yA, int xB, int yB) {
 	//nie można wykonać ruchu w miejscu

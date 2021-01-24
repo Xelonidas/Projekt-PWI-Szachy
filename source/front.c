@@ -298,7 +298,7 @@ void draw_pieces(WINDOW *board)
         {//kon
          {' ', ' ', ' ', '\\', '`', '~', '\'', '/', ' ', ' ', ' '},
          {' ', ' ', ' ', '(', 'o', ' ', 'o', ')', ' ', ' ', ' '},
-         {' ', ' ', ' ', ' ', '\\', ' ', '/', '\\', ' ', ' ', ' '},
+         {' ', ' ', ' ', '/', '\\', ' ', '/', '\\', ' ', ' ', ' '},
          {' ', ' ', ' ', ' ', ' ', '"', ' ', ' ', ' ', ' ', ' '}},
         {//goniec
          {' ', ' ', ' ', '/', ' ', '+', ' ', '\\', ' ', ' ', ' '},
@@ -414,7 +414,7 @@ void main_menu()
     char choices[4][12] = {
         "Zwykla gra",
         "Horda",
-        "Jakas opcja",
+        "Rewolucja",
         "Wyjdz z gry"
     };
     bool isPicked = false;
@@ -457,21 +457,30 @@ void main_menu()
         if(highlight > 3) highlight--;
         if(highlight < 0) highlight++;
     }
+    
+	wclear(MenuContainer);
+	bkgd(COLOR_PAIR(25));
+	delwin(MenuContainer);
+	clear();
+    
     switch (highlight)
     {
         case 0:
-            wclear(MenuContainer);
-            bkgd(COLOR_PAIR(25));
-            delwin(MenuContainer);
-            clear();
             gameInit();
             main_loop();
             break;
         case 1:
+			gameInit();
+			gameHoardInit();
+            main_loop();
+            break;
         case 2:
+			gameInit();
+			gameRevoltInit();
+            main_loop();
             break;
         case 3:
-            return;
+            exit(0);
             break;
         default:
             break;
