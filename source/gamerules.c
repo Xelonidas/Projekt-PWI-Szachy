@@ -311,23 +311,25 @@ int checkWinCondition(int color) {
 	return 0;
 }
 
-bool isKingChecked(int color) {
-	int kingx, kingy;
+int isKingChecked(int color) {
+	int kingx, kingy, status = 0;
 	for(int y = 0; y < 8; y++) {
 		for(int x = 0; x < 8; x++) {
 			if(getChessPiece(x, y).type == 6 && getChessPiece(x, y).color == color) {
-				kingx = x; kingy = y;
+				kingx = x; kingy = y; status = 1;
 			}
 		}
 	}
+	if(status == 0) return 0;
+	
 	ChessPiece cp;
 	for(int y = 0; y < 8; y++) {
 		for(int x = 0; x < 8; x++) {
 			cp = getChessPiece(x, y);
-			if(cp.color + color == 3 && cp.moveFunctionPointer(cp.color, x, y, kingx, kingy)) return true;
+			if(cp.color + color == 3 && cp.moveFunctionPointer(cp.color, x, y, kingx, kingy)) return 1;
 		}
 	}
-	return false;
+	return 2;
 }
 
 void DisplayArrayContent() {

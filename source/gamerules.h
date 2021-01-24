@@ -9,7 +9,12 @@ bool checkKnightMove(int color, int xA, int yA, int xB, int yB);
 bool checkRookMove(int color, int xA, int yA, int xB, int yB);
 bool checkQueenMove(int color, int xA, int yA, int xB, int yB);
 bool checkKingMove(int color, int xA, int yA, int xB, int yB);
-bool isKingChecked(int color);
+/*
+ *	0 - król zbity
+ *  1 - król szachowany 
+ *  2 - król bezpieczny
+ */
+int isKingChecked(int color);
 
 //performMove przyjmuje informacje o ruchy który trzeba wykonać.
 //sprawdzi za pomocą powyższych funkcji ckeckXYZMove(...) czy ruch może zostać wykonany
