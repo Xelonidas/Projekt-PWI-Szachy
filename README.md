@@ -22,6 +22,12 @@ Projekt jest implementacją komputerową znanej gry planszowej - szachy w język
 Projekt tworzony jest w języku programistycznym C z użyciem biblioteki ncurses.
 
 ## Instrukcja instalacji i uruchomienia
+* Do uruchomienia gry wymagane są pakiety:
+```
+ncuses
+make
+gcc
+```
 * Sklonuj repozytorium
 * Wejdż do repozytorium i wykonaj polecenie:
 ```
@@ -32,7 +38,8 @@ make
 ./szachy
 ```
 ## Jak grać?
-W głównym menu wybierz opcję ```Nowa gra```. <br>
+Oferujemy 3 tryby rozgrywki.
+W głównym menu wybierz opcję ```zwykła gra``` ```horda``` lub ```rewolucja```. <br>
 Ruchy wykonuj podając najpierw koordynaty bierka, który chcesz wybrać, a następnie koordynaty, na które chcesz go przestawić.<br>
 Po wprowadzeniu litery i cyfry koordynatów (np. ```e4```) zatwierdź je przyciskiem enter.
 
